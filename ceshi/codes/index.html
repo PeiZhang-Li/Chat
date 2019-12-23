@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/vue.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model="msg">
+    <button @click="fun">发送</button>
+</div>
+<script>
+    var socket=io();
+    const VM=new Vue({
+        el:'#app',
+        data:{
+            msg:''
+        },
+        methods:{
+            fun(){
+                socket.emit('send-msg',this.msg)
+            }
+        }
+    });
+    socket.on('msg',function (msg) {
+        console.log(msg)
+    })
+</script>
+</body>
+</html>
