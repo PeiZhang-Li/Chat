@@ -11,9 +11,13 @@ export default {
 </script>
 
 <style>
+  *{
+    font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  }
   html,body,ul,li,ol,dl,dd,dt,p,h1,h2,h3,h4,h5,h6,form,fieldset,legend,img {
     margin:0;
-    padding:0
+    padding:0;
+
   }
   fieldset,img {
     border:0
@@ -50,4 +54,5 @@ export default {
   textarea{
     resize:none
   }
+
 </style>

@@ -9,35 +9,43 @@
       <i class="el-icon-lock"></i> 密&nbsp;&nbsp;&nbsp;&nbsp;码：
       <el-input v-model="password" placeholder="请输入内容" class="inpt"></el-input>
     </div>
-    <el-button type="primary" plain style="margin-top: 40px" @click="logins">登录</el-button>
+    <el-button type="primary" plain style="margin-top: 40px" @click="logins" :disabled="!kg"><span v-show="!kg"><i class="el-icon-loading"></i>登录中...</span><span v-show="kg">登录</span></el-button>
   </div>
 </template>
 
 <script>
+
 export default {
   name: 'Login',
   data () {
     return {
        username:'',
-        password:''
+        password:'',
+      kg:true,
     }
   },
     methods:{
       logins(){
-          let _this=this;
+        this.kg=false;
           this.$axios.post('http://127.0.0.1:3001/login',{'name':this.username,'pwd':this.password}).then((res,error)=>{
-              console.log(res.data)
               if(res.data=='1'){
+                this.kg=true;
                   this.$message({
-                      message: '恭喜你，这是一条成功消息',
+                      message: '登陆成功',
                       type: 'success'
                   });
+               this.$router.push({ name:'index'})
               }else if(res.data=='-1'){
-                  _this.$message('检查您的账号密码');
+                this.kg=true;
+                this.$message({
+                  message: '请检查您的密码和用户名',
+                  type: 'error'
+                });
               }
           })
       }
     }
+
 }
 </script>
 
