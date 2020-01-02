@@ -15,13 +15,12 @@ let email = {
             }
         });
         let now = new Date().getTime();
-
         let nowstr = String(Number(now))
         let nows = nowstr.substring(nowstr.length - 6, nowstr.length);
 
         let mailOpt = {
-            from: `"WebChat" <${emailUrl}>`, // 你到qq邮箱地址
-            to: '593872818@qq.com', // 接受人,可以群发填写多个逗号分隔
+            from: `"WebChat" <593872818@qq.com>`, // 你到qq邮箱地址
+            to: `${emailUrl}`, // 接受人,可以群发填写多个逗号分隔
             subject: '重置您的账户密码', // 主题名(邮件名)
             // 可以发送text或者html格式,2选1
             // text: 'Hello world?', // 纯文本

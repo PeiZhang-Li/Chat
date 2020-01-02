@@ -1,9 +1,8 @@
 let express = require('express');
 let mongodb = require('./mongo');
 let objectId = require('mongodb').ObjectID;
-
 var bodyparser = require('body-parser');
-let emails = require('./sendemail')
+let emails = require('./sendemail');
 const app = express();
 app.use("/", express.static('static'));
 app.use('/uploads', express.static('uploads'));
