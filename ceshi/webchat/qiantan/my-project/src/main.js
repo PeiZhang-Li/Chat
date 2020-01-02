@@ -13,7 +13,7 @@ Vue.use(ElementUI);
 Vue.prototype.$axios = axios;
 router.beforeEach((to, form, next) => {
 
-  if (to.path === '/login' || to.path === '/Register') {
+  if (to.path === '/login' || to.path === '/Register' || to.path === '/Getback') {
     next();
   } else {
     //false为没过期，true为过期

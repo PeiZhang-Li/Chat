@@ -1,8 +1,10 @@
 let express = require('express');
 let mongodb = require('./mongo');
 let objectId = require('mongodb').ObjectID;
+
 var bodyparser = require('body-parser');
-const app=express();
+let emails = require('./sendemail')
+const app = express();
 app.use("/", express.static('static'));
 app.use('/uploads', express.static('uploads'));
 
@@ -23,6 +25,8 @@ app.all("*",function(req,res,next){
         next();
 });
 //各个路由模块
+
+
 //后台登录模块
 app.get('/',(req,res)=>{
 
@@ -51,5 +55,11 @@ app.post('/register', function (req, res) {
             res.send('-1')
         }
     })
+});
+let yzcode = '';
+app.post('/Getback', function (req, res) {
+    let email = req.body.email;
+    yzcode = emails.sends(email);
+    res.send('1')
 });
 http.listen(3001);

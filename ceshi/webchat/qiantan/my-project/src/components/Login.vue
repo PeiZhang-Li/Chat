@@ -13,6 +13,8 @@
       class="el-icon-loading"></i>登录中...</span><span v-show="kg">登录</span></el-button>
     <br/><br/><br/>
     <router-link to="/Register">没有账号？立即注册！</router-link>
+    <br/><br/><br/>
+    <router-link to="/Getback">忘记密码？点击找回!</router-link>
   </div>
 </template>
 
@@ -37,7 +39,7 @@ export default {
         } else {
           this.kg = false;
 
-          this.$axios.post('http://127.0.0.1:3001/login', {
+          this.$axios.post('http://127.0.0.1:3001/', {
             'email': this.email,
             'pwd': this.password
           }).then((res, error) => {
