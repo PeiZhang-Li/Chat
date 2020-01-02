@@ -1,48 +1,64 @@
 <template>
   <div class="box">
-      <h2>用户登录</h2>
+    <h2>用户登录</h2>
     <div class="inps">
-       <i class="el-icon-user-solid"></i> 用户名：
-      <el-input v-model="username" placeholder="请输入内容" class="inpt"></el-input>
+      <i class="el-icon-user-solid"></i> 邮&nbsp;&nbsp;&nbsp;&nbsp;箱：
+      <el-input v-model="email" placeholder="请输入内容" class="inpt"></el-input>
     </div>
     <div class="inps">
       <i class="el-icon-lock"></i> 密&nbsp;&nbsp;&nbsp;&nbsp;码：
       <el-input v-model="password" placeholder="请输入内容" class="inpt"></el-input>
     </div>
-    <el-button type="primary" plain style="margin-top: 40px" @click="logins" :disabled="!kg"><span v-show="!kg"><i class="el-icon-loading"></i>登录中...</span><span v-show="kg">登录</span></el-button>
+    <el-button type="primary" plain style="margin-top: 40px" @click="logins" :disabled="!kg"><span v-show="!kg"><i
+      class="el-icon-loading"></i>登录中...</span><span v-show="kg">登录</span></el-button>
+    <br/><br/><br/>
+    <router-link to="/Register">没有账号？立即注册！</router-link>
   </div>
 </template>
 
 <script>
-
+  import localStorage_Time from "../../static/js/localStorage_Time";
 export default {
   name: 'Login',
   data () {
     return {
-       username:'',
-        password:'',
-      kg:true,
+      email: '',
+      password: '',
+      kg: true,
     }
   },
     methods:{
-      logins(){
-        this.kg=false;
-          this.$axios.post('http://127.0.0.1:3001/login',{'name':this.username,'pwd':this.password}).then((res,error)=>{
-              if(res.data=='1'){
-                this.kg=true;
-                  this.$message({
-                      message: '登陆成功',
-                      type: 'success'
-                  });
-               this.$router.push({ name:'index'})
-              }else if(res.data=='-1'){
-                this.kg=true;
-                this.$message({
-                  message: '请检查您的密码和用户名',
-                  type: 'error'
-                });
-              }
+      logins() {
+        if (this.email.length === 0 || this.password.length === 0) {
+          this.$message({
+            message: '请检查您的密码和用户名',
+            type: 'error'
+          });
+        } else {
+          this.kg = false;
+
+          this.$axios.post('http://127.0.0.1:3001/login', {
+            'email': this.email,
+            'pwd': this.password
+          }).then((res, error) => {
+            if (res.data == '1') {
+              this.kg = true;
+              this.$message({
+                message: '登陆成功',
+                type: 'success'
+              });
+              // this.$router.push({ name:'index'});
+              localStorage_Time.setAge(30000).set("userInfo", this.email)
+            } else if (res.data == '-1') {
+              this.kg = true;
+              this.$message({
+                message: '请检查您的密码和用户名',
+                type: 'error'
+              });
+            }
           })
+        }
+
       }
     }
 

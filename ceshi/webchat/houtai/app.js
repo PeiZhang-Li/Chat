@@ -1,23 +1,10 @@
-let express=require('express');
-let mongodb=require('./mongo')
+let express = require('express');
+let mongodb = require('./mongo');
 let objectId = require('mongodb').ObjectID;
-const session = require('express-session');
-// const redis = require('redis');
-// const RedisStore = require('connect-redis')(expressSession);
-
 var bodyparser = require('body-parser');
 const app=express();
 app.use("/", express.static('static'));
 app.use('/uploads', express.static('uploads'));
-//使用 session 中间件
-app.use(session({
-    secret: 'secret key', //使用随机自定义字符串进行加密
-    saveUninitialized: false,//不保存未初始化的cookie，也就是未登录的cookie
-    cookie: {
-        maxAge: 24 * 60 * 60 * 1000, //设置cookie的过期时间为1天
-        activeDuration: 5* 60*1000, // 激活时间，比如设置为30分钟，那么只要30分钟内用户有服务器的交互，那么就会被重新激活。
-    }
-}))
 
 app.use(bodyparser.json()); // 使用bodyparder中间件，
 app.use(bodyparser.urlencoded({ extended: true }));
@@ -38,30 +25,31 @@ app.all("*",function(req,res,next){
 //各个路由模块
 //后台登录模块
 app.get('/',(req,res)=>{
-    res.redirect(req.session.lastpage)
-    console.log(req.session)//session里面包含了存储的所有内容
-    // if(req.session.username){  //判断session 状态，如果有效，则返回主页，否则转到登录页面
-    //
-    //     res.send('1')
-    // }else{
-    //    res.send('-1')
-    // }
+
 });
 app.post('/login',function (req,res) {
-    let name=req.body.name;
-    let pwd=req.body.pwd;
-    mongodb.cha("user","root",{'name':name,'password':pwd}).then((resq,err)=>{
-        if(resq.length==1){
-            req.session.user = name;
-            console.log(req.session+'11111111')
-            res.send('1')
-            // req.session.userName = req.body.username;//设置session
-        }else{
-            res.send('-1');
+    let email = req.body.email;
+    let pwd = req.body.pwd;
+    mongodb.cha("user", "root", {'email': email, 'password': pwd}).then((resq, err) => {
+        if (resq.length == 1) {
 
+            res.send('1');
+        } else {
+            res.send('-1');
         }
     });
-    //
 
+});
+app.post('/register', function (req, res) {
+    let name = req.body.name;
+    let pwd = req.body.pwd;
+    let email = req.body.email;
+    mongodb.zeng("user", "root", email, name, pwd).then((resq) => {
+        if (resq === 1) {
+            res.send('1')
+        } else {
+            res.send('-1')
+        }
+    })
 });
 http.listen(3001);

@@ -54,6 +54,8 @@ let localStorage_Time= {
       // 当前时间是否大于过期时间
 
       isExpire = now > value._age;
+      console.log(now)
+      console.log(value._age)
     } else {
       // 没有值也是过期
     }
