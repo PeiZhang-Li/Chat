@@ -19,8 +19,9 @@
 </template>
 
 <script>
-  import localStorage_Time from "../../static/js/localStorage_Time";
-export default {
+    import localStorage_Time from "../../static/js/localStorage_Time";
+
+    export default {
   name: 'Login',
   data () {
     return {
@@ -50,7 +51,7 @@ export default {
                 type: 'success'
               });
               // this.$router.push({ name:'index'});
-              localStorage_Time.setAge(30000).set("userInfo", this.email)
+                localStorage_Time.setAge(1000 * 60 * 60).set("userInfo", this.email)//设置登录时长一个小时过期
             } else if (res.data == '-1') {
               this.kg = true;
               this.$message({

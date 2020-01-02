@@ -52,7 +52,7 @@
                 message: '注册成功',
                 type: 'success'
               });
-
+                this.$router.push({name: 'Login'})
             } else if (res.data == '-1') {
               this.kg = true;
               this.$message({

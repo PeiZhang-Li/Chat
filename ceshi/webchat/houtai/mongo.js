@@ -37,6 +37,20 @@ let mongodb = {
             })
 
         })
+    },
+    xiu: function (dbname, tabname, email, password) {
+        return new Promise(resolve => {
+            MongoClient.connect(url, {useNewUrlParser: true}, (err, db) => {
+                let dbo = db.db(dbname);
+                dbo.collection(tabname).updateOne(email, {$set: password}, (err) => {
+                    if (!err) {
+                        resolve('1')
+                    } else {
+                        resolve('-1')
+                    }
+                })
+            })
+        })
     }
 };
 module.exports=mongodb;

@@ -35,7 +35,6 @@ app.post('/login',function (req,res) {
     let pwd = req.body.pwd;
     mongodb.cha("user", "root", {'email': email, 'password': pwd}).then((resq, err) => {
         if (resq.length == 1) {
-
             res.send('1');
         } else {
             res.send('-1');
@@ -59,6 +58,26 @@ let yzcode = '';
 app.post('/Getback', function (req, res) {
     let email = req.body.email;
     yzcode = emails.sends(email);
+    setTimeout(() => {
+        yzcode = ''
+    }, 60000);//设置一分钟过期
     res.send('1')
+});
+app.post('/modify', function (req, res) {
+    let email = req.body.email;
+    let password = req.body.password;
+    let code = req.body.yzcode;
+    if (code == yzcode) {
+        mongodb.xiu("user", "root", {'email': email}, {'password': password}).then((resd) => {
+            if (resd == 1) {
+                res.send('1')
+            } else {
+                res.send('-1')
+            }
+
+        })
+    } else {
+        res.send('-1')
+    }
 });
 http.listen(3001);

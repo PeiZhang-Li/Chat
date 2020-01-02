@@ -8,19 +8,19 @@
     </div>
     <div class="inps">
       <i class="el-icon-link"></i> 验证码：
-      <el-input v-model="password" placeholder="请输入内容" class="inpt"></el-input>
+      <el-input v-model="yzcode" placeholder="请输入内容" class="inpt"></el-input>
     </div>
     <div class="inps">
       <i class="el-icon-lock"></i> 新密码：
-      <el-input v-model="password" placeholder="请输入内容" class="inpt"></el-input>
+      <el-input v-model="password" placeholder="请输入内容" class="inpt" type="password"></el-input>
     </div>
-    <el-button type="primary" plain style="margin-top: 40px" @click="" :disabled="!kg"><span v-show="!kg"><i
-      class="el-icon-loading"></i>修改中...</span><span v-show="kg">修改</span></el-button>
+    <el-button type="primary" plain style="margin-top: 40px" @click="logins" :disabled="!kg"><span v-show="!kg"><i
+      class="el-icon-loading"></i>请稍后...</span><span v-show="kg">修改</span></el-button>
   </div>
 </template>
 
 <script>
-  import localStorage_Time from "../../static/js/localStorage_Time";
+
 
   export default {
     name: 'Getback',
@@ -49,7 +49,39 @@
             });
           }
         })
-      }//发送验证码
+      },//发送验证码
+        logins() {
+
+            if (this.email.length === 0 || this.password.length === 0 || this.yzcode.length === 0) {
+                this.$message({
+                    message: '验证失败，请检查',
+                    type: 'error'
+                });
+            } else {
+                this.kg = false;
+                this.$axios.post('http://127.0.0.1:3001/modify', {
+                    'password': this.password,
+                    'email': this.email,
+                    'yzcode': this.yzcode
+                }).then((res) => {
+                    if (res.data === 1) {
+                        this.kg = true;
+                        this.$message({
+                            message: '修改成功',
+                            type: 'success'
+                        });
+                        this.$router.push({name: 'Login'})
+                    } else {
+                        this.kg = true;
+                        this.$message({
+                            message: '验证失败，请检查',
+                            type: 'error'
+                        });
+                    }
+                })
+            }
+
+        }
     }
 
   }
