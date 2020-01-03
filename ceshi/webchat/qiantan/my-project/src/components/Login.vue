@@ -40,7 +40,7 @@
         } else {
           this.kg = false;
 
-          this.$axios.post('http://127.0.0.1:3001/', {
+            this.$axios.post('http://127.0.0.1:3001/login', {
             'email': this.email,
             'pwd': this.password
           }).then((res, error) => {

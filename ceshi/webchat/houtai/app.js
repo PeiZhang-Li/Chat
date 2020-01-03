@@ -1,12 +1,12 @@
 let express = require('express');
 let mongodb = require('./mongo');
 let objectId = require('mongodb').ObjectID;
+let multiparty = require('multiparty');
 var bodyparser = require('body-parser');
 let emails = require('./sendemail');
 const app = express();
 app.use("/", express.static('static'));
 app.use('/uploads', express.static('uploads'));
-
 app.use(bodyparser.json()); // 使用bodyparder中间件，
 app.use(bodyparser.urlencoded({ extended: true }));
 const http=require('http').Server(app);
@@ -80,4 +80,14 @@ app.post('/modify', function (req, res) {
         res.send('-1')
     }
 });
+app.post('/addtouxiang', function (req, res) {
+    //上传头像部分
+    //1.获取参数的值
+    let form = new multiparty.Form();
+    form.uploadDir = "uploads"; //设置文件上传的目录
+    form.parse(req, (err, fields, files) => {
+    })
+    //fields正常post传递的参数
+    //files文件上传的信息
+})
 http.listen(3001);
