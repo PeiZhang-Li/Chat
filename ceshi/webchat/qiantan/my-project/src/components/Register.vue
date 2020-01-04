@@ -7,7 +7,7 @@
     </div>
     <div class="inps">
       <i class="el-icon-lock"></i> 密&nbsp;&nbsp;&nbsp;&nbsp;码：
-      <el-input v-model="password" placeholder="请输入内容" class="inpt"></el-input>
+      <el-input v-model="password" placeholder="请输入内容" class="inpt" type="password"></el-input>
     </div>
     <div class="inps">
       <i class="el-icon-message"></i> 邮&nbsp;&nbsp;&nbsp;&nbsp;箱:&nbsp;&nbsp;&nbsp;

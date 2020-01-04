@@ -18,16 +18,15 @@ let mongodb = {
             })
         })
     },
-    zeng: function (dbname, tabname, email, username, password) {
+    zeng: function (dbname, tabname, value) {
         return new Promise(resolve => {
-            this.cha(dbname, tabname, {'email': email}).then(res => {
+            this.cha(dbname, tabname, value).then(res => {
                 if (res.length == 1) {
                     resolve(-1)
                 } else {
                     MongoClient.connect(url, {useNewUrlParser: true}, (err, db) => {
                         let dbo = db.db(dbname);
-                        var myuser = {'name': username, 'password': password, 'email': email};
-                        dbo.collection(tabname).insertOne(myuser, function (err, res) {
+                        dbo.collection(tabname).insertOne(value, function (err, res) {
                             if (!err) {
                                 resolve(1)
                             }
@@ -38,11 +37,11 @@ let mongodb = {
 
         })
     },
-    xiu: function (dbname, tabname, email, password) {
+    xiu: function (dbname, tabname, email, value) {
         return new Promise(resolve => {
             MongoClient.connect(url, {useNewUrlParser: true}, (err, db) => {
                 let dbo = db.db(dbname);
-                dbo.collection(tabname).updateOne(email, {$set: password}, (err) => {
+                dbo.collection(tabname).updateOne(email, {$set: value}, (err) => {
                     if (!err) {
                         resolve('1')
                     } else {

@@ -7,7 +7,7 @@
     </div>
     <div class="inps">
       <i class="el-icon-lock"></i> 密&nbsp;&nbsp;&nbsp;&nbsp;码：
-      <el-input v-model="password" placeholder="请输入内容" class="inpt"></el-input>
+      <el-input v-model="password" placeholder="请输入内容" class="inpt" type="password"></el-input>
     </div>
     <el-button type="primary" plain style="margin-top: 40px" @click="logins" :disabled="!kg"><span v-show="!kg"><i
       class="el-icon-loading"></i>登录中...</span><span v-show="kg">登录</span></el-button>
@@ -50,8 +50,8 @@
                 message: '登陆成功',
                 type: 'success'
               });
-              // this.$router.push({ name:'index'});
-                localStorage_Time.setAge(1000 * 60 * 60).set("userInfo", this.email)//设置登录时长一个小时过期
+              localStorage_Time.setAge(1000 * 60 * 60).set("userInfo", this.email)//设置登录时长一个小时过期
+              this.$router.push({name: 'index'});
             } else if (res.data == '-1') {
               this.kg = true;
               this.$message({

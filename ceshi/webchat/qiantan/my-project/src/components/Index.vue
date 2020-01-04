@@ -1,8 +1,7 @@
 <template>
 <div>
-  <heads>
-
-  </heads>
+  <heads/>
+  <h1>Index</h1>
 </div>
 </template>
 

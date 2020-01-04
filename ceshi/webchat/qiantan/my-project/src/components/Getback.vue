@@ -42,10 +42,16 @@
         this.$axios.post('http://127.0.0.1:3001/Getback', {
           'email': this.email
         }).then((res, error) => {
+
           if (res.data == '1') {
             this.$message({
               message: '发送成功,请注意查收',
               type: 'success'
+            });
+          } else {
+            this.$message({
+              message: '发送失败，请检查',
+              type: 'error'
             });
           }
         })

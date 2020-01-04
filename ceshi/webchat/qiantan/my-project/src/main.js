@@ -7,6 +7,8 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import axios from 'axios';
 import localStorage_Time from "../static/js/localStorage_Time";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
 
 Vue.config.productionTip = false;
 Vue.use(ElementUI);
@@ -18,7 +20,8 @@ router.beforeEach((to, form, next) => {
   } else {
     //false为没过期，true为过期
     if (localStorage_Time.isExpire('userInfo')) {
-      localStorage.removeItem('userInfo');
+      localStorage.removeItem('userInfo');//清空用户登录状态
+      localStorage.removeItem('usermsg');//清空用户信息
       next('/login')
     } else {
       next();

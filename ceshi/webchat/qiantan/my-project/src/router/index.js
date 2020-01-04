@@ -4,11 +4,16 @@ import Login from '@/components/Login'
 import Index from "@/components/Index";
 import Register from "@/components/Register";
 import Getback from "@/components/Getback";
+import Edit from "@/components/Edit";
 Vue.use(Router);
 
 export default new Router({
     mode: 'history',
   routes: [
+    {
+      path: '/index',
+      redirect: '/'
+    },
     {
       path: '/',
       name: 'index',
@@ -28,6 +33,11 @@ export default new Router({
       path: '/Getback',
       name: 'Getback',
       component: Getback
+    },
+    {
+      path: '/edit',
+      name: 'edit',
+      component: Edit
     }
   ]
 }
