@@ -2,17 +2,16 @@ let express = require('express');
 let mongodb = require('./mongo');
 let objectId = require('mongodb').ObjectID;
 let multiparty = require('multiparty');
-var bodyparser = require('body-parser');
+let bodyparser = require('body-parser');
 let fs = require('fs');
 let emails = require('./sendemail');
-
 const app = express();
 app.use("/", express.static('static'));
 app.use('/uploads', express.static('uploads'));
 app.use(bodyparser.json()); // 使用bodyparder中间件，
 app.use(bodyparser.urlencoded({ extended: true }));
 const http=require('http').Server(app);
-//跨越处理
+//跨域处理
 app.all("*",function(req,res,next){
     //设置允许跨域的域名，*代表允许任意域名跨域
     res.header("Access-Control-Allow-Origin","*");

@@ -8,8 +8,9 @@
       background-color="#545c64"
       text-color="#fff"
       active-text-color="#ffd04b">
-      <el-menu-item index="/index">首页</el-menu-item>
+      <el-menu-item index="/index">好友列表</el-menu-item>
       <el-menu-item index="3">个人中心</el-menu-item>
+      <el-menu-item index="3">搜索</el-menu-item>
       <el-submenu index="2" style="float: right">
         <template slot="title">
           <div class="el-icon-user" v-if="kg"></div>
@@ -24,10 +25,9 @@
 </template>
 
 <script>
+    import localStorage_Time from "../../../static/js/localStorage_Time";
 
-  import localStorage_Time from "../../../static/js/localStorage_Time";
-
-  export default {
+    export default {
     name: "heads",
     data() {
       return {
@@ -46,13 +46,12 @@
         }).then(() => {
           localStorage.removeItem('userInfo');//清空用户登录状态
           localStorage.removeItem('usermsg');//清空用户信息
-          this.$router.push({name: 'login'})
+            this.$router.push('/login', () => {
+            })
         }).catch((e) => {
           console.log(e)
         });
       }
-
-
     },
     created() {
       let userInfo = localStorage_Time.get('userInfo');
@@ -66,7 +65,7 @@
           let url = usermsg.userimg.path;
           this.url = `http://127.0.0.1:3001/${url.replace("\\", "/")}`
         } else {
-          console.log('没有照片')
+            return false;
         }
       });
     }
@@ -77,7 +76,5 @@
 .heads{
   width: 100%;
   height: 50px;
-
 }
-
 </style>

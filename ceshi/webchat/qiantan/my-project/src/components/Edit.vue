@@ -3,6 +3,8 @@
     <heads/>
     <form name="userinfo" action="http://127.0.0.1:3001/adduserinfo" method="post" enctype="multipart/form-data">
       <div class="box">
+        <span>当前头像：</span>
+        <el-image style="width: 30px; height: 30px;border-radius: 50%;" :src="url"></el-image>
         <div class="input-group ">
           <span class="input-group-addon">头像</span>
           <input type="file" class="form-control" placeholder="Username" aria-describedby="basic-addon1"
@@ -26,21 +28,32 @@
 
 <script>
 
-  import heads from "./public/heads";
+    import heads from "./public/heads";
+    import localStorage_Time from "../../static/js/localStorage_Time";
 
-  export default {
+    export default {
     name: "Edit",
     components: {heads},
     data() {
       return {
         emali: '',
-        username: ''
+          username: '',
+          url: ''
       }
     },
     methods: {},
     created() {
       //用户名!!!!!!
-
+        let usermsg = localStorage_Time.get('usermsg');
+        this.username = usermsg.name.name;
+        this.emali = usermsg.name.email;
+        if (usermsg.userimg != '-1') {
+            this.kg = false;
+            let url = usermsg.userimg.path;
+            this.url = `http://127.0.0.1:3001/${url.replace("\\", "/")}`
+        } else {
+            return false;
+        }
     }
   }
 </script>

@@ -11,10 +11,11 @@
     </div>
     <el-button type="primary" plain style="margin-top: 40px" @click="logins" :disabled="!kg"><span v-show="!kg"><i
       class="el-icon-loading"></i>登录中...</span><span v-show="kg">登录</span></el-button>
-    <br/><br/><br/>
-    <router-link to="/Register">没有账号？立即注册！</router-link>
-    <br/><br/><br/>
-    <router-link to="/Getback">忘记密码？点击找回!</router-link>
+    <br/>
+    <br/>
+    <router-link to="/Register">注册</router-link>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <router-link to="/Getback">找回密码</router-link>
   </div>
 </template>
 
@@ -64,7 +65,6 @@
 
       }
     }
-
 }
 </script>
 
