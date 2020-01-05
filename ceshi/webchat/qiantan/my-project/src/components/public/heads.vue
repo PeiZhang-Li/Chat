@@ -4,13 +4,13 @@
       router
       class="el-menu-demo"
       mode="horizontal"
-      default-active="/index"
+      :default-active="herf"
       background-color="#545c64"
       text-color="#fff"
       active-text-color="#ffd04b">
       <el-menu-item index="/index">好友列表</el-menu-item>
       <el-menu-item index="3">个人中心</el-menu-item>
-      <el-menu-item index="3">搜索</el-menu-item>
+      <el-menu-item index="/search">搜索</el-menu-item>
       <el-submenu index="2" style="float: right">
         <template slot="title">
           <div class="el-icon-user" v-if="kg"></div>
@@ -34,7 +34,8 @@
         url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
         kg: true,
         emali: '',
-        username: ''
+          username: '',
+          herf: ''
       }
     },
     methods: {
@@ -68,6 +69,7 @@
             return false;
         }
       });
+        this.herf = location.href.substr(location.href.lastIndexOf('/'))
     }
   }
 </script>

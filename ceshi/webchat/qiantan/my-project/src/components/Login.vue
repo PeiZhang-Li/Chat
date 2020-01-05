@@ -2,7 +2,7 @@
   <div class="box">
     <h2>用户登录</h2>
     <div class="inps">
-      <i class="el-icon-user-solid"></i> 邮&nbsp;&nbsp;&nbsp;&nbsp;箱：
+      <i class="el-icon-message"></i> 邮&nbsp;&nbsp;&nbsp;&nbsp;箱：
       <el-input v-model="email" placeholder="请输入内容" class="inpt"></el-input>
     </div>
     <div class="inps">

@@ -150,5 +150,8 @@ app.post('/adduserinfo', function (req, res) {
 
     })
 
-})
+});
+app.post('/search', function (req, res) {
+
+});
 http.listen(3001);
