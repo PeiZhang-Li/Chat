@@ -159,12 +159,11 @@ app.post('/search', function (req, res) {
 
         if (resq.length !== 0) {
             resq.forEach((item, value) => {
-
                 arrs.push(item.name);// 储存用户名,后期计划使用对象扩大储存
-
                 let id = objectId(item._id);
+                //准备进行二次查询，查询头像地址
+                
                 if (value === item.length - 1) {
-
                     res.send('1')
                 }
 
