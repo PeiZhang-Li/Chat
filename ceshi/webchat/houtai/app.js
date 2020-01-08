@@ -152,6 +152,27 @@ app.post('/adduserinfo', function (req, res) {
 
 });
 app.post('/search', function (req, res) {
+    let msg = req.body;
+    let arrs = [];
+
+    mongodb.cha("user", "root", msg).then((resq) => {
+
+        if (resq.length !== 0) {
+            resq.forEach((item, value) => {
+
+                arrs.push(item.name);// 储存用户名,后期计划使用对象扩大储存
+
+                let id = objectId(item._id);
+                if (value === item.length - 1) {
+
+                    res.send('1')
+                }
+
+            })
+        } else {
+            res.send('-1')
+        }
+    });
 
 });
 http.listen(3001);
