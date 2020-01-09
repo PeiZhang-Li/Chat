@@ -2,22 +2,22 @@
 <div>
   <heads/>
   <h1>Index</h1>
+  <footers/>
 </div>
 </template>
 
 <script>
   import heads from './public/heads'
+  import footers from "./public/footers";
     export default {
-    components:{heads},
-        name: "Index",
-      data(){
-      return{
-        msg:''
-      }
+      components: {heads, footers},
+      name: "Index",
+      data() {
+        return {
+          msg: ''
+        }
       },
-      methods:{
-
-      },
+      methods: {},
       created() {
 
       }

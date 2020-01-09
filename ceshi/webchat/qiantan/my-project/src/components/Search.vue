@@ -1,30 +1,31 @@
 <template>
   <div>
     <heads/>
-    <div class="box">
-      <el-input v-model="msg" placeholder="请输入用户名或者邮箱地址" style="width: 70%" @input="yanzheng"></el-input>
-      <el-button icon="el-icon-search" circle @click="search"></el-button>
-    </div>
+
+    <el-input v-model="msg" placeholder="请输入用户名或者邮箱地址" style="width: 87%" @input="yanzheng"></el-input>
+    <el-button icon="el-icon-search" circle @click="search"></el-button>
+
+    <footers/>
   </div>
 
 </template>
 
 <script>
-    import heads from "./public/heads";
-
+  import heads from "./public/heads";
+  import footers from "./public/footers";
     export default {
-        name: "Search",
-        components: {heads},
-        data() {
-            return {
-              msg: '',
-              kg: true
-            }
-        },
-        methods: {
-          yanzheng() {
-            const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
-            if (mailReg.test(this.msg)) {
+      name: "Search",
+      components: {heads, footers},
+      data() {
+        return {
+          msg: '',
+          kg: true
+        }
+      },
+      methods: {
+        yanzheng() {
+          const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+          if (mailReg.test(this.msg)) {
               // 邮箱格式一旦正确则去进行精确查询
               this.kg = false
             } else {

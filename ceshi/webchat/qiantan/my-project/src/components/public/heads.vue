@@ -4,17 +4,14 @@
       router
       class="el-menu-demo"
       mode="horizontal"
-      :default-active="herf"
       background-color="#545c64"
       text-color="#fff"
       active-text-color="#ffd04b">
-      <el-menu-item index="/index">好友列表</el-menu-item>
-      <el-menu-item index="3">个人中心</el-menu-item>
-      <el-menu-item index="/search">搜索</el-menu-item>
       <el-submenu index="2" style="float: right">
         <template slot="title">
           <div class="el-icon-user" v-if="kg"></div>
-          <el-image style="width: 30px; height: 30px;border-radius: 50%;" :src="url" v-if="!kg"></el-image>&nbsp;<span>{{username}}</span>
+          <el-image style="width: 30px; height: 30px;border-radius: 50%;" :src="url" v-if="!kg"></el-image>&nbsp;<span
+          style="font-size: 12px">{{username}}</span>
         </template>
         <el-menu-item index="/edit">编辑个人信息</el-menu-item>
         <el-menu-item index="/Register">注册新账号</el-menu-item>
@@ -34,24 +31,15 @@
         url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
         kg: true,
         emali: '',
-          username: '',
-          herf: ''
+        username: ''
       }
     },
     methods: {
       tuichu() {
-        this.$confirm('确定退出么?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          localStorage.removeItem('userInfo');//清空用户登录状态
-          localStorage.removeItem('usermsg');//清空用户信息
-            this.$router.push('/login', () => {
-            })
-        }).catch((e) => {
-          console.log(e)
-        });
+        localStorage.removeItem('userInfo');//清空用户登录状态
+        localStorage.removeItem('usermsg');//清空用户信息
+        this.$router.push('/login', () => {
+        })
       }
     },
     created() {
@@ -69,7 +57,7 @@
             return false;
         }
       });
-        this.herf = location.href.substr(location.href.lastIndexOf('/'))
+      // this.herf = location.href.substr(location.href.lastIndexOf('/'))
     }
   }
 </script>

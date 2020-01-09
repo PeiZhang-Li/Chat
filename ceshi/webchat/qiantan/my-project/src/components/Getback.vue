@@ -2,9 +2,12 @@
   <div class="box">
     <h2>找回密码</h2>
     <div class="inps">
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="el-icon-message"></i> 邮&nbsp;&nbsp;&nbsp;&nbsp;箱：
+      <i class="el-icon-message"></i> 邮&nbsp;&nbsp;&nbsp;&nbsp;箱：
       <el-input v-model="email" placeholder="请输入内容" class="inpt"></el-input>
-      <el-button icon="el-icon-thumb" circle :disabled="kg1" @click="send"></el-button>
+      <div class="cir">
+        <el-button icon="el-icon-thumb" circle :disabled="kg1" @click="send"></el-button>
+      </div>
+
     </div>
     <div class="inps">
       <i class="el-icon-link"></i> 验证码：
@@ -95,9 +98,9 @@
 
 <style scoped>
   .box {
-    width: 600px;
+    width: 350px;
     height: 400px;
-    border: 1px solid #ccc;
+
     margin: 0 auto;
     margin-top: 150px;
     text-align: center;
@@ -107,6 +110,15 @@
 
   .inps {
     margin-top: 40px;
+    position: relative;
+  }
+
+  .cir {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 20px;
+    right: 24px;
   }
 
   .inpt {

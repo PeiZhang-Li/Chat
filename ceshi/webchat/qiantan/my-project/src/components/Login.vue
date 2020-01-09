@@ -71,9 +71,8 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .box{
-    width: 600px;
+    width: 350px;
     height: 400px;
-    border: 1px solid #ccc;
     margin: 0 auto;
     margin-top: 150px;
     text-align: center;
