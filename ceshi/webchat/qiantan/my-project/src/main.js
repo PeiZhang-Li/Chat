@@ -6,12 +6,14 @@ import router from './router'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import axios from 'axios';
-import localStorage_Time from "../static/js/localStorage_Time";
+import store from "./Store";
+import localStorage_Time from "./localStorage_Time";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
-
+// import VueSocketIO from 'vue-socket.io'
 Vue.config.productionTip = false;
 Vue.use(ElementUI);
+// Vue.use(new VueSocketIO({connection: 'http://127.0.0.1:3001',}))
 Vue.prototype.$axios = axios;
 router.beforeEach((to, form, next) => {
 
@@ -32,7 +34,8 @@ router.beforeEach((to, form, next) => {
 new Vue({
   el: '#app',
   router,
-  components: { App },
+  store,
+  components: {App},
   template: '<App/>'
 });
 

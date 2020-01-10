@@ -31,7 +31,7 @@
 
   import heads from "./public/heads";
   import footers from "./public/footers";
-  import localStorage_Time from "../../static/js/localStorage_Time";
+  import localStorage_Time from "../localStorage_Time";
 
     export default {
       name: "Edit",

@@ -14,6 +14,7 @@
           style="font-size: 12px">{{username}}</span>
         </template>
         <el-menu-item index="/edit">编辑个人信息</el-menu-item>
+        <el-menu-item index="/Getback">修改密码</el-menu-item>
         <el-menu-item index="/Register">注册新账号</el-menu-item>
         <el-menu-item @click="tuichu">退出登录</el-menu-item>
       </el-submenu>
@@ -22,7 +23,7 @@
 </template>
 
 <script>
-    import localStorage_Time from "../../../static/js/localStorage_Time";
+  import localStorage_Time from "../../localStorage_Time";
 
     export default {
     name: "heads",

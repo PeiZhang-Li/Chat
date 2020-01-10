@@ -1,6 +1,6 @@
 <template>
   <div class="box">
-    <h2>找回密码</h2>
+    <h2>重置密码</h2>
     <div class="inps">
       <i class="el-icon-message"></i> 邮&nbsp;&nbsp;&nbsp;&nbsp;箱：
       <el-input v-model="email" placeholder="请输入内容" class="inpt"></el-input>
@@ -75,11 +75,11 @@
                 }).then((res) => {
                     if (res.data === 1) {
                         this.kg = true;
-                        this.$message({
-                            message: '修改成功',
-                            type: 'success'
-                        });
-                        this.$router.push({name: 'Login'})
+                      this.$message({
+                        message: '修改成功',
+                        type: 'success'
+                      });
+                      history.back()
                     } else {
                         this.kg = true;
                         this.$message({

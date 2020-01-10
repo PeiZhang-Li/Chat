@@ -6,11 +6,13 @@ let bodyparser = require('body-parser');
 let fs = require('fs');
 let emails = require('./sendemail');
 const app = express();
+
 app.use("/", express.static('static'));
 app.use('/uploads', express.static('uploads'));
 app.use(bodyparser.json()); // 使用bodyparder中间件，
 app.use(bodyparser.urlencoded({ extended: true }));
-const http=require('http').Server(app);
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 //跨域处理
 app.all("*",function(req,res,next){
     //设置允许跨域的域名，*代表允许任意域名跨域
@@ -154,24 +156,37 @@ app.post('/adduserinfo', function (req, res) {
 app.post('/search', function (req, res) {
     let msg = req.body;
     let arrs = [];
-
     mongodb.cha("user", "root", msg).then((resq) => {
 
         if (resq.length !== 0) {
             resq.forEach((item, value) => {
-                arrs.push(item.name);// 储存用户名,后期计划使用对象扩大储存
-                let id = objectId(item._id);
+                let email = item.email;
                 //准备进行二次查询，查询头像地址
-                
-                if (value === item.length - 1) {
-                    res.send('1')
-                }
+                mongodb.cha("user", "userimg", {'email': email}).then((resa) => {
+                    if (resa.length !== 0) {
+                        let path = `http://127.0.0.1:3001/${resa[0].path.replace("\\", "/")}`;
+                        arrs.push({'name': item.name, 'email': item.email, 'path': path});
 
+                    } else {
+                        let path = '';
+                        arrs.push({'name': item.name, 'email': item.email, 'path': path});
+                    }
+                    // console.log(value)
+
+                    if (resq.length - 1 === value) {
+                        res.send(arrs)
+                    }
+                });
             })
         } else {
-            res.send('-1')
+            res.send(arrs)
         }
     });
 
+});
+app.post('/addfriend', function (req, res) {
+    let obj = req.body;
+    console.log(obj)
+    res.end()
 });
 http.listen(3001);
